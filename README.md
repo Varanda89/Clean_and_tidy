@@ -6,9 +6,9 @@ Run_analysis.R - This R scripts perform a series of actions described below upon
 
    https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.
    
-   It must be necessary downloading and unzip it in the working directory, otherwise it will not work
+  * It must be necessary downloading and unzip it in the working directory, otherwise it will not work
    
-   Package dplyr must have been previously installed
+  * Package dplyr must have been previously installed
    
  CodeBook.md - It explains the output variables for Run_analysis.R scripts
  
