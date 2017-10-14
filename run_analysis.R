@@ -1,5 +1,6 @@
-##Setting dplyr package
+##Setting packages
 library(dplyr)
+library(reshape2)
 
 ##Getting datasets (test)
 setwd("./UCI HAR Dataset/test")
@@ -42,14 +43,16 @@ names(ALabels)[2]<-"activity"
 DFrame_aux<-merge(DFrame,ALabels,by.x="action",by.y="V1")
 ##Getting code variable erased
 DFrame<-select(DFrame_aux,-action)
+variables<-names(DFrame[2:67])
+DFrame<-melt(DFrame,measure.vars=variables)
 
 ## 4. Labeling the data set with descriptive variable names and rearragning it
-## done in previous lines
+names(DFrame)<-c("subject","activity","feature","result")
 
 ## 5. Creating a different DataSet with averaging each variable grouped by activity and subject
-DFrame2<-group_by(DFrame,subject,activity)
-DFrame2<-summarize_all(DFrame2,mean)
+DFrame2<-group_by(DFrame,subject,activity,feature)
+DFrame3<-summarize(DFrame2,result=mean(result))
 
 ## Exporting results in a file
 setwd("..")
-write.table(DFrame2,"summary.txt",row.names=F)
+write.table(DFrame3,"tidy.txt",row.names=F)
